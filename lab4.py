@@ -1,15 +1,13 @@
 class Node:
-    """Вузол червоно-чорного дерева."""
     def __init__(self, value, priority):
         self.value = value
         self.priority = priority
-        self.color = 1  # 1 - Червоний, 0 - Чорний
+        self.color = 1  
         self.parent = None
         self.left = None
         self.right = None
 
 class RedBlackPriorityQueue:
-    """Черга з пріоритетами на основі червоно-чорного дерева."""
     
     def __init__(self):
         self.TNULL = Node(None, None)
@@ -19,7 +17,6 @@ class RedBlackPriorityQueue:
         self.root = self.TNULL
 
     def insert(self, value, priority):
-        """Вставляє елемент із заданим значенням та пріоритетом."""
         node = Node(value, priority)
         node.parent = None
         node.left = self.TNULL
@@ -53,7 +50,6 @@ class RedBlackPriorityQueue:
         self._insert_fixup(node)
 
     def extract_max(self):
-        """Видаляє та повертає елемент (value, priority) з найвищим пріоритетом."""
         if self.root == self.TNULL:
             return None
 
@@ -81,7 +77,6 @@ class RedBlackPriorityQueue:
         return result
 
     def peek(self):
-        """Повертає елемент (value, priority) з найвищим пріоритетом без видалення."""
         if self.root == self.TNULL:
             return None
 
@@ -124,7 +119,7 @@ class RedBlackPriorityQueue:
     def _insert_fixup(self, k):
         while k.parent.color == 1:
             if k.parent == k.parent.parent.right:
-                u = k.parent.parent.left  # Дядько (Uncle)
+                u = k.parent.parent.left  
                 if u.color == 1:
                     u.color = 0
                     k.parent.color = 0
@@ -138,7 +133,7 @@ class RedBlackPriorityQueue:
                     k.parent.parent.color = 1
                     self._left_rotate(k.parent.parent)
             else:
-                u = k.parent.parent.right  # Дядько (Uncle)
+                u = k.parent.parent.right  
                 if u.color == 1:
                     u.color = 0
                     k.parent.color = 0
@@ -158,7 +153,7 @@ class RedBlackPriorityQueue:
     def _delete_fixup(self, x):
         while x != self.root and x.color == 0:
             if x == x.parent.left:
-                s = x.parent.right  # Брат (Sibling)
+                s = x.parent.right  
                 if s.color == 1:
                     s.color = 0
                     x.parent.color = 1
@@ -181,7 +176,7 @@ class RedBlackPriorityQueue:
                     self._left_rotate(x.parent)
                     x = self.root
             else:
-                s = x.parent.left  # Брат (Sibling)
+                s = x.parent.left  
                 if s.color == 1:
                     s.color = 0
                     x.parent.color = 1
